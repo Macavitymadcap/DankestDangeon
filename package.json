@@ -1,0 +1,21 @@
+{
+  "name": "fightingdantasy",
+  "version": "1.0.0",
+  "description": "A hypertext adventure game book with D&D style mechanics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && cp src/index.html dist && cp -R src/css dist",
+    "app": "http-server src -c-1 -o"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "htmx": "^0.0.2"
+  }
+}

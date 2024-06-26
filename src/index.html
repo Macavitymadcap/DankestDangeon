@@ -5,15 +5,37 @@
     <title>Dangeon Crawl</title>
 
     <!-- style imports -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=MedievalSharp&display=swap');
+        </style>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/character-creator.css">
-    <link rel="stylesheet" href="css/choices.css">
+    <!-- <link rel="stylesheet" href="css/character-creator.css">
+    <link rel="stylesheet" href="css/choices.css"> -->
 
     <!-- external script imports -->
     <script src="https://unpkg.com/htmx.org@1.8.4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
     <!-- template definitions  -->
+    <script id="narrative-scene-template" type="text/x-handlebars-template">
+        <div class="card narrative-scene">
+            <h2>{{title}}</h2>
+            {{#if image}}
+                <img src="images/{{image}}" alt="{{title}}" class="scene-image">
+            {{/if}}
+            <!-- <img src="images/{{image}}" alt="{{title}}"> -->
+            {{#each description}}
+                <p>{{this}}</p>
+            {{/each}}
+            <ul class="choices">
+                {{#each choices}}
+                    <li>
+                        <a href="#" data-scene-id="{{sceneId}}">{{text}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </script>
 
     <script id="character-creator-template" type="text/x-handlebars-template">
         <div class="card character-creator">
@@ -33,34 +55,19 @@
                     </select>
                 </div>
                 <div class="choices">
-                    <button type="submit">Begin Adventure</button>
+                    <button type="submit" id="begin-adventure-button">Begin Adventure</button>
                 </div>
             </form>
         </div>
     </script>
 
-    <script id="narrative-scene-template" type="text/x-handlebars-template">
-        <div class="card narrative-scene">
-            <h2>{{title}}</h2>
-            {{#each description}}
-                <p>{{this}}</p>
-            {{/each}}
-            <div class="choices">
-                {{#each choices}}
-                    <a href="#" data-scene-id="{{sceneId}}">{{text}}</a>
-                {{/each}}
-            </div>
-        </div>
-    </script>
-
     <script id="character-sheet-template" type="text/x-handlebars-template">
         <div class="card character-sheet">
-            <h2>{{name}}</h2>
-            <p>Class: {{characterClass}}</p>
-            <p>Hit Points: {{currentHitPoints}} / {{maximumHitPoints}}</p>
-            <p>Armour Class: {{armourClass}} ({{armourName}})</p>
-            <p>Attack: {{attack.string}}</p>
-            <p>Inventory: {{inventoryString}}</p>
+            <h2>{{name}} the {{characterClass}}</h2>
+            <p><b>Hit Points:</b> {{currentHitPoints}}/{{maximumHitPoints}}</p>
+            <p><b>Armour Class:</b> {{armourClass}} ({{armourName}})</p>
+            <p><b>Attack:</b> {{attack.string}}</p>
+            <p><b>Inventory:</b> {{inventoryString}}</p>
         </div>
     </script>
 
@@ -70,16 +77,39 @@
     <script src="js/character.js" type="module"></script>
     <script src="js/character-classes.js" type="module"></script>
     <script src="js/dice.js" type="module"></script>
+
+    <!-- Page initialisation script-->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', currentTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+        });
+    </script>
 </head>
 
 <body>
     <header>
         <h1>Dankest Dangeon</h1>
+        <button id="theme-toggle">Toggle Theme</button>
     </header>
     <main>
         <section id="scene"></section>
         <section id="sheet"></section>
     </main>
+    <script type="module">
+        import { loadScene, CHARACTER_SHEET_CONTAINER } from './js/template-loader.js';
+        document.addEventListener("DOMContentLoaded", () => {
+            loadScene(0);
+            CHARACTER_SHEET_CONTAINER.innerHTML = "";
+        });
+    </script>
 </body>
 
 </html>

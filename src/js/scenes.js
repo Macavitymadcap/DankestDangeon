@@ -2,6 +2,7 @@ const scenes = {
     0: {
         type: "narrative",
         title: "New Game",
+        image: "cloaked-figure.webp",
         description: [
             "Well met traveller, welcome to the Dangeon crawl!",
             "This is a hypertext love-letter to adventure game books, written using D&D 5th edition OL mechanics.",
@@ -33,6 +34,7 @@ const scenes = {
     2: {
         type: "narrative",
         title: "The Dark Forest",
+        image: "dark-forest.webp",
         description: [
             "You find yourself in a dark and eerie forest.", 
             "The trees loom overhead, blocking out most of the light.", 
@@ -53,6 +55,7 @@ const scenes = {
     3: {
         type: "narrative",
         title: "Big River",
+        image: "big-river.webp",
         description: [
             "Heading east into the forest, you come across a wide river.",
             "The water is dark and murky, and you can hear the sound of rushing water.", 
@@ -71,10 +74,12 @@ const scenes = {
     },
     4: {
         type: "narrative",
-        title: "Truffle Snuffling!",
+        title: "As Pigs in Muck",
+        image: "fucked-up-pigs.webp",
         description: [
-            "As you walk north, you come across a family of pigs.", 
-            "They are busy snuffling around in the undergrowth.", 
+            "As you walk north, you come across a family of pigs. The pigs at first galnce appear normal, but the more you look the odder they seem.",
+            "Almost as if they were the creation of some deity that had heard of pigs but never actually seen one.", 
+            "They are busy snuffling around in the undergrowth, covered in filth and oblivious to your presence.", 
             "What do you do?"
         ],
         choices: [
@@ -91,10 +96,11 @@ const scenes = {
     5: {
         type: "narrative",
         title: "Truffle Feast",
+        image: "truffle-feast.webp",
         description:[ 
-            "You join the truffle pigs in their search for truffles.", 
-            "After a while, you find a huge truffle and the pigs invite you to share it with them.", 
-            "You add a handfull of tasty truffles to your inventory."
+            "You join the bizarre looking pigs snuffling in the undergrowth. After much searching they begin grunting and reveal truffles in the earth.", 
+            "The pigs seem proper chuffed, and start gorging on the hoard of truffle. You join them, and they are delicious and nutritious - healing you of the aches of the road..", 
+            "You add a handful of the tasty truffles to your inventory and make your goodbyes to the pigs."
         ],
         choices: [
             {

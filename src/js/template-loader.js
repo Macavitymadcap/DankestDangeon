@@ -1,9 +1,11 @@
 import scenes from "./scenes.js";
+import { PlayerCharacter } from "./character.js";
+// import { NarrativeScene, CharacterCreator } from "./scene.js";
 
 const CHARACTER_SHEET_TEMPLATE = document.getElementById("character-sheet-template").innerHTML;
 const NARRATIVE_SCENE_TEMPLATE = document.getElementById("narrative-scene-template").innerHTML;
 const CHARACTER_CREATOR_TEMPLATE = document.getElementById("character-creator-template").innerHTML;
-const CHARACTER_SHEET_CONTAINER = document.getElementById("sheet");
+export const CHARACTER_SHEET_CONTAINER = document.getElementById("sheet");
 
 /**
  * Compile the character creator template
@@ -46,13 +48,6 @@ function getRenderedTemplate(scene) {
     }
 }
 
-function populateNewGame(sceneContainer) {
-    const newGameButton = sceneContainer.querySelector("button");
-    newGameButton.addEventListener("click", () => {
-        loadScene(1);
-    });
-}
-
 /**
  * Populate scene container with the character creator form
  * @param {HTMLElement} sceneContainer The conatiner to load the character creator into
@@ -80,7 +75,6 @@ function populateNarrativeScene(sceneContainer) {
     const choices = sceneContainer.querySelectorAll(".choices a");
     choices.forEach(choice => {
         choice.addEventListener("click", (event) => {
-            console.log(event.target.dataset)
             event.preventDefault();
             loadScene(getSceneId(event));
         });
@@ -94,9 +88,6 @@ function populateNarrativeScene(sceneContainer) {
  */
 function populateScene(sceneContainer, type) {
     switch (type) {
-        case "new-game":
-            populateNewGame(sceneContainer);
-            break;
         case "character-creator":
             populateCharacterCreator(sceneContainer);
             break;
@@ -126,8 +117,3 @@ export function loadCharacterSheet() {
     const renderedCharacterSheet = renderCharacterSheet(playerCharacter);
     CHARACTER_SHEET_CONTAINER.innerHTML = renderedCharacterSheet;
 }
-
-document.addEventListener("DOMContentLoaded", () => {   
-    loadScene(0);
-    CHARACTER_SHEET_CONTAINER.innerHTML = "";
-});

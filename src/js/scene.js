@@ -1,4 +1,4 @@
-import { PlayerCharacter } from "./character";
+import { PlayerCharacter } from "./character.js";
 
 /**
  * Base class for scenes
@@ -13,16 +13,15 @@ import { PlayerCharacter } from "./character";
  */
 class Scene {
     sceneContainer = document.getElementById("scene")
+    templateId = ""
 
-    constructor(sceneData, templateId) {
+    constructor(sceneData) {
         this.sceneData = sceneData;
-        this.templateId = templateId;
         this.template = document.getElementById(this.templateId);
         this.render = Handlebars.compile(this.template);
     }
 
     /**
-
      * @memberof Scene
      * @returns {void}
      * @instance
@@ -30,7 +29,7 @@ class Scene {
      * @public
      */
     renderTemplate() {
-        this.sceneContainer.innerHTML = this.render(sceneData)
+        this.sceneContainer.innerHTML = this.render(this.sceneData)
     }
 
     /**
@@ -74,6 +73,7 @@ class Scene {
  * @method getRenderedTemplate Renders the template
  */
 export class NarrativeScene extends Scene {
+    templateId = "narrative-scene-template"
     /**
      * Populates the scene with the ability to select choices
      * @memberof NarrativeScene
@@ -105,7 +105,8 @@ export class NarrativeScene extends Scene {
  * @property {Object} sceneData The data for the scene
  * @property {string} templateId The template for the scene
  */
-export class CharacterCreatorScene extends Scene {
+export class CharacterCreator extends Scene {
+    templateId = "character-creator-template"
     /**
      * Populates the scene with the a form for generating a character
      * @memberof CharacterCreatorScene

@@ -4,7 +4,7 @@
   "description": "A hypertext adventure game book with D&D style mechanics",
   "main": "index.js",
   "scripts": {
-    "app": "http-server src -c-1 -o"
+    "dev": "http-server src -c-1 -o"
   },
   "author": "",
   "license": "ISC",

@@ -4,13 +4,15 @@ const scenes = {
         title: "New Game",
         image: "cloaked-figure.webp",
         description: [
-            "Well met traveller, welcome to the Dangeon crawl!",
-            "This is a hypertext love-letter to adventure game books, written using D&D 5th edition OL mechanics.",
-            "To begin your crawl around the Dangeon, click the button below to start a new game"
+            "Well met traveller, be ye brave enough to face the Dankest of All Dangeons?",
+            "This is a hyper text love letter to adventure game books of yore, where your decisions shape the story.",
+            "Not only is this Dangeon Dank, it also Dangerous, and it is unlikely you will reach then end on your first run.",
+            "But fear not, for you can always start again, and try a different path.",
+            "So, are you ready to begin your adventure?"
         ],
         choices: [
             {
-                text: "New Game",
+                text: "Create Character",
                 sceneId: 1
             }
         ]
@@ -18,15 +20,21 @@ const scenes = {
     1: {
         type: "character-creator",
         title: "Character Creator",
-        description: ["Choose from the following options to creae your character:"],
+        description: ["Choose from the following options to create your character:"],
         characterClasses: [
             "Fighter",
             "Rogue",
             "Wizard"
         ], 
+        characterRaces: [
+            "Human",
+            "Elf",
+            "Dwarf",
+            "Halfling",
+        ],
         choices: [
             {
-                text: "Create Character",
+                text: "Begin Adventure",
                 sceneId: 2
             }
         ]
@@ -36,9 +44,9 @@ const scenes = {
         title: "The Dark Forest",
         image: "dark-forest.webp",
         description: [
-            "You find yourself in a dark and eerie forest.", 
-            "The trees loom overhead, blocking out most of the light.", 
-            "You can hear the sound of rustling leaves and the occasional snap of a twig.",
+            "You find yourself in a dark and eerie forest.",
+            "Trees loom overhead, blocking out most of the light, and the air is thick with the smell of damp earth.", 
+            "To your south and west you are enclosed by the dense forest, to the north and east you can see a faint light filtering through the trees.",
             "Which way do you want to go?"
         ],
         choices: [
@@ -105,8 +113,11 @@ const scenes = {
         choices: [
             {
                 text: "Continue north",
-                sceneId: 4
+                sceneId: 2
             }
+        ],
+        items: [
+            "handful of truffles"
         ]
     },
     6: {

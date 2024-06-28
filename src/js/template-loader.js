@@ -1,6 +1,5 @@
 import scenes from "./scenes.js";
 import { PlayerCharacter } from "./character.js";
-// import { NarrativeScene, CharacterCreator } from "./scene.js";
 
 const CHARACTER_SHEET_TEMPLATE = document.getElementById("character-sheet-template").innerHTML;
 const NARRATIVE_SCENE_TEMPLATE = document.getElementById("narrative-scene-template").innerHTML;
@@ -31,7 +30,8 @@ const renderCharacterSheet = Handlebars.compile(CHARACTER_SHEET_TEMPLATE);
 
 function getSceneId(event) {
     return event.target.dataset.sceneId;
-} 
+}
+
 /**
  * Get the rendered HTML for a scene
  * @param {object} scene The scene to render
@@ -59,7 +59,8 @@ function populateCharacterCreator(sceneContainer) {
         const formData = new FormData(form);
         const characterName = formData.get("character-name");
         const characterClass = formData.get("character-class");
-        const playerCharacter = PlayerCharacter.createPlayerCharacter(characterName, characterClass);
+        const characterRace = formData.get("character-race")
+        const playerCharacter = PlayerCharacter.createPlayerCharacter(characterName, characterClass, characterRace);
         sessionStorage.setItem("playerCharacter", JSON.stringify(playerCharacter));
         loadCharacterSheet();
         loadScene(2);
@@ -99,9 +100,25 @@ function populateScene(sceneContainer, type) {
     }
 }
 
+function getPlayerCharacterJSON() {
+    return JSON.parse(sessionStorage.getItem("playerCharacter"));
+}
+
+function addItems(items) {
+    const playerCharacter = getPlayerCharacterJSON();
+    playerCharacter.inventory = [...playerCharacter.inventory, ...items];
+    sessionStorage.setItem("playerCharacter", JSON.stringify(playerCharacter));
+}
+
+export function loadCharacterSheet() {
+    const playerCharacter = getPlayerCharacterJSON();
+    const renderedCharacterSheet = renderCharacterSheet(playerCharacter);
+    CHARACTER_SHEET_CONTAINER.innerHTML = renderedCharacterSheet;
+}
+
 /**
  * Load a scene into the scene container
- * @param {number} sceneId The id fo the scene to load
+ * @param {number} sceneId The id for the scene to load
  * @returns {void} 
  */
 export function loadScene(sceneId) {
@@ -110,10 +127,9 @@ export function loadScene(sceneId) {
     const sceneContainer = document.getElementById("scene");
     sceneContainer.innerHTML = renderedScene;
     populateScene(sceneContainer, scene.type);
+    if (scene.items) {
+        addItems(scene.items);
+        loadCharacterSheet();
+    }
 }
 
-export function loadCharacterSheet() {
-    const playerCharacter = JSON.parse(sessionStorage.getItem("playerCharacter"));
-    const renderedCharacterSheet = renderCharacterSheet(playerCharacter);
-    CHARACTER_SHEET_CONTAINER.innerHTML = renderedCharacterSheet;
-}

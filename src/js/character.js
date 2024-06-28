@@ -1,10 +1,13 @@
 import { Dice } from "./dice.js";
-import { characterClasses } from "./character-classes.js";
+import { fighter, wizard, rogue } from "./character-class.js";
+import { AbilityScores } from "./ability-scores.js";
+import { human, elf, dwarf, halfling } from "./character-race.js";
 
 /**
  * Represents a character
  * @class Character
  * @param {string} name The character's name
+ * @param {AbilityScores} abilityScores The character's ability scores
  * @param {number} maximumHitPoints The character's maximum hit points
  * @param {number} armourClass The character's armour class
  * @param {string} armourName The character's armour name
@@ -18,8 +21,9 @@ import { characterClasses } from "./character-classes.js";
  * @method isDead Whether the character is dead
  */
 class Character {
-    constructor(name, maximumHitPoints, armourClass, armourName, attack) {
+    constructor(name, abilityScores, maximumHitPoints, armourClass, armourName, attack) {
         this.name = name;
+        this.abilityScores = abilityScores;
         this.maximumHitPoints = maximumHitPoints;
         this.currentHitPoints = maximumHitPoints;
         this.armourClass = armourClass;
@@ -44,6 +48,7 @@ class Character {
  * @class PlayerCharacter
  * @extends Character
  * @param {string} name The character's name
+ * @param {AbilityScores} abilityScores The character's ability scores
  * @param {number} maximumHitPoints The character's maximum hit points
  * @param {number} armourClass The character's armour class
  * @param {string} armourName The character's armour name
@@ -59,11 +64,18 @@ class Character {
  * @method createPlayerCharacter Creates a new player character
  */
 export class PlayerCharacter extends Character {
-    constructor(name, maximumHitPoints, armourClass, armourName, attack, characterClass, inventory = []) {
-        super(name, maximumHitPoints, armourClass, armourName, attack);
-        this.characterClass = characterClass
+    constructor(name, abilityScores,  maximumHitPoints, armourClass, armourName, attack, characterClass, inventory = []) {
+        super(name, abilityScores, maximumHitPoints, armourClass, armourName, attack);
+        this.class = characterClass
         this.inventory = inventory;
         this.inventoryString = this.getInventoryString();
+        this.size = "Medium";
+        this.race = "Human";
+        this.raceAdjective = "Human";
+        this.proficiencies = [];
+        this.languages = ["Common"];
+        this.traits = [];
+
     }
 
     /**
@@ -124,47 +136,86 @@ export class PlayerCharacter extends Character {
      * @static
      * @returns {PlayerCharacter} The new player character
      */
-    static createPlayerCharacter(name, characterClass) {
-        const fighter = characterClasses.fighter;
-        const wizard = characterClasses.wizard;
-        const rogue = characterClasses.rogue;
+    static createPlayerCharacter(name, characterClass, race) {
+        let character;
         switch (characterClass) {
             case "Fighter":
-                return new PlayerCharacter(
+                character = new PlayerCharacter(
                     name, 
+                    fighter.abilityScores,
                     fighter.maximumHitPoints, 
                     fighter.armourClass, 
                     fighter.armourName, 
                     fighter.attack, 
-                    characterClass, 
+                    fighter.name, 
                     fighter.inventory
                 );
+                break;
             
             case "Wizard":
-                return new PlayerCharacter(
-                    name, 
+                character = new PlayerCharacter(
+                    name,
+                    wizard.abilityScores,
                     wizard.maximumHitPoints, 
                     wizard.armourClass, 
                     wizard.armourName, 
                     wizard.attack, 
-                    characterClass, 
+                    wizard.name, 
                     wizard.inventory
                 );
+                break;
             
             case "Rogue":
-                return new PlayerCharacter(
-                    name, 
+                character = new PlayerCharacter(
+                    name,
+                    rogue.abilityScores,
                     rogue.maximumHitPoints, 
                     rogue.armourClass, 
                     rogue.armourName, 
                     rogue.attack, 
-                    characterClass, 
+                    rogue.name, 
                     rogue.inventory
                 );
+                break
         
             default:
                 console.error(`Invalid character class: ${characterClass}`);
                 break;
         }
+
+        let playerRace;
+
+        switch (race) {
+            case "Human":
+                playerRace = human;
+                break;
+                
+            case "Elf":
+                playerRace = elf;
+                break;
+
+            case "Dwarf":
+                playerRace = dwarf;
+                break;
+
+            case "Halfling":
+                playerRace = halfling
+                break;
+
+            default:
+                console.error(`Invalid race ${race}`);
+                break;
+        }
+
+        character.race = playerRace.name;
+        character.raceAdjective = playerRace.nameAdjective;
+        character.size = playerRace.size;
+        character.languages += playerRace.languages;
+        character.traits += playerRace.traits;
+        character.proficiencies += playerRace.proficiencies;
+        for (const [key, value] of Object.entries(playerRace.abilityScoreModifiers)) {
+            character.abilityScores[key] += value;
+        }
+        return character;
     }
 }

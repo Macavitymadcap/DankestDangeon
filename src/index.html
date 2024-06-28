@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>Dangeon Crawl</title>
+    <title>DankestDangeon</title>
+    <meta charset="UTF-8">
 
     <!-- style imports -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=MedievalSharp&display=swap');
-        </style>
+    </style>
     <link rel="stylesheet" href="css/main.css">
     <!-- <link rel="stylesheet" href="css/character-creator.css">
     <link rel="stylesheet" href="css/choices.css"> -->
@@ -54,6 +55,14 @@
                         {{/each}}
                     </select>
                 </div>
+                <div class="form-row">
+                    <label for="character-race">Race</label>
+                    <select id="character-race" name="character-race" required>
+                        {{#each characterRaces}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </select>
+                </div>
                 <div class="choices">
                     <button type="submit" id="begin-adventure-button">Begin Adventure</button>
                 </div>
@@ -63,11 +72,59 @@
 
     <script id="character-sheet-template" type="text/x-handlebars-template">
         <div class="card character-sheet">
-            <h2>{{name}} the {{characterClass}}</h2>
-            <p><b>Hit Points:</b> {{currentHitPoints}}/{{maximumHitPoints}}</p>
-            <p><b>Armour Class:</b> {{armourClass}} ({{armourName}})</p>
-            <p><b>Attack:</b> {{attack.string}}</p>
-            <p><b>Inventory:</b> {{inventoryString}}</p>
+            <div class="character-title">
+                <h2>{{name}} the {{raceAdjective}} {{class}}</h2>
+            </div>
+            <table id="ability-scores">
+                <tr>
+                    <th>STR</th>
+                    <th>DEX</th>
+                    <th>CON</th>
+                    <th>INT</th>
+                    <th>WIS</th>
+                    <th>CHA</th>
+                </tr>
+                <tr>
+                    <td>{{abilityScores.strength}}</td>
+                    <td>{{abilityScores.dexterity}}</td>
+                    <td>{{abilityScores.constitution}}</td>
+                    <td>{{abilityScores.intelligence}}</td>
+                    <td>{{abilityScores.wisdom}}</td>
+                    <td>{{abilityScores.charisma}}</td>
+                </tr>
+                <tr>
+                    <td>{{abilityScores.strengthModifierString}}</td>
+                    <td>{{abilityScores.dexterityModifierString}}</td>
+                    <td>{{abilityScores.constitutionModifierString}}</td>
+                    <td>{{abilityScores.intelligenceModifierString}}</td>
+                    <td>{{abilityScores.wisdomModifierString}}</td>
+                    <td>{{abilityScores.charismaModifierString}}</td>
+                </tr>
+            </table>
+            <div class="form-row">
+                <label for="hit-points">Hit Points</label>
+                <p name="hit-points" class="hit-points">
+                    <span class="current-hit-points">{{currentHitPoints}}</span>
+                    <span class="divider">/</span>
+                    <span class="maximum-hit-points">{{maximumHitPoints}}</span>
+                </p>
+            </div> 
+            <div class="form-row">
+                <label for="armour-class">Armour Class</label> 
+                <p name="armour-class">{{armourClass}}<i> ({{armourName}})</i></p>
+            </div>
+            <div class="form-row">
+                <label for="attack">Attack</label>
+                <p name="attack">{{attack.string}}</p>
+            </div>
+            <div class="form-row" id="inventory-row">
+                <label id="inventory" for="inventory">Inventory</label>
+                <ul name="inventory">
+                    {{#each inventory}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
     </script>
 
@@ -75,7 +132,8 @@
     <script src="js/scenes.js" type="module"></script>
     <script src="js/template-loader.js" type="module"></script>
     <script src="js/character.js" type="module"></script>
-    <script src="js/character-classes.js" type="module"></script>
+    <script src="js/character-class.js" type="module"></script>
+    <script src="js/character-race.js" type="module"></script>
     <script src="js/dice.js" type="module"></script>
 
     <!-- Page initialisation script-->

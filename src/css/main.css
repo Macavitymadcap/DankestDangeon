@@ -2,22 +2,26 @@
     --background-color: #fff;
     --text-color: #333;
     --card-background: #f2f2f2;
-    --input-focus-border-color: #007BFF;
-    --button-background: #f9f9f9;
+    --input-focus-color: #e0f0ff;
+    --button-background: #f9f9f9eb;
     --button-text-color: #333;
-    --button-hover-background: rgb(211, 208, 208);
-    --button-hover-text-color: #fff;
+    --button-hover-background: #f2f2f2;
+    --button-hover-text-color: #5a5a5a;
+    --link-hover-color: #a7a9a7;
+    --input-text-color: #333;
+    --input-border-color: #ccc;
 }
 
 [data-theme="dark"] {
     --background-color: #333;
     --text-color: #f2f2f2;
     --card-background: #555;
-    --input-focus-border-color: #7dbbfe;
+    --input-focus-color: #3f3f3f;
     --button-background: #555;
     --button-text-color: #f2f2f2;
     --button-hover-background: #777;
     --button-hover-text-color: #fff;
+    --link-hover-color: #a7a9a7;
     --input-background: #444;
     --input-text-color: #ccc;
     --input-border-color: #666;
@@ -43,6 +47,41 @@ main {
     flex-direction: column;
 }
 
+
+
+section {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+    font-family: 'MedievalSharp', cursive;
+}
+
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin: 20px;
+    box-sizing: border-box;
+    width: 80%;
+    font-family: 'crimson-text', serif;
+    max-width: 600px;
+    background-color: var(--card-background);
+    border-radius: 10px;
+}
+
+/* Scene Styles */
 button {
     background-color: var(--button-background);
     color: var(--button-text-color);
@@ -64,68 +103,55 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-section {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-header {
-    width: 100%;
-    text-align: center;
-}
-
-
-h1,
-h2,
-h3 {
-    text-align: center;
-    font-family: 'MedievalSharp', cursive;
-}
-
-.card {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    margin: 20px;
-    box-sizing: border-box;
-    width: 80%;
-    font-family: 'crimson-text', serif;
-    max-width: 600px;
-    background-color: var(--card-background);
-    border-radius: 10px;
-}
-
 .choices {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    width: 100%;
-
-    a {
-        display: inline-block;
-        margin: 0 10px 10px 0;
-        padding: 10px 15px;
-        background-color: var(--button-background);
-        color: var(--button-text-color);
-        font-size: 16px;
-        text-decoration: none;
-        text-align: center;
-        border-radius: 5px;
-        transition: background-color 0.3s, box-shadow 0.3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-    }
-
-    a:hover,
-    a:focus {
-        background-color: var(--button-hover-background);
-        color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        text-decoration: none;
-    }
 }
 
+.choices a {
+    list-style: none;
+    padding-left: 0;
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    padding: 5px 8px;
+    background-color: transparent;
+    color: var(--button-text-color);
+    font-size: 16px;
+    text-decoration: underline;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    transition: color 0.3s, text-decoration-color 0.3s;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.choices li::before {
+    content: "\261E"; /* You can replace '•' with any character or Unicode symbol */
+    color: var(--text-color); /* Custom color */
+    font-weight: bold; /* Custom font weight */
+    display: inline-block; /* Makes the pseudo-element behave like text */
+    width: 1em; /* Ensures proper spacing between the bullet and the text */
+    margin-left: -1em; /* Adjusts position to align with the list items */
+}
+
+.choices a:hover,
+.choices a:focus {
+    color: var(--link-hover-color);
+    text-decoration-color: var(--link-hover-color);
+    background-color: transparent;
+}
+
+.scene-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Form Styles */
 label {
     display: block;
     margin-bottom: 5px;
@@ -143,44 +169,91 @@ select {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
-    background-color: var(--input-background, #fff);
+    background-color: var(--input-background, #fff) !important;
     color: var(--input-text-color, #333);
     border: 1px solid var(--input-border-color, #ccc);
 }
 
 input[type="text"]:focus,
 select:focus {
-    border-color: var(--input-focus-border-color);
+    background-color: var(--input-focus-color) !important;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 5px var(--input-focus-color);
+    border-color: var(--input-focus-color);
     outline: none;
-}
-
-.scene-image {
-    max-width: 100%;
-    height: auto;
-    display: block; /* Ensures the image is centered if it's smaller than the container */
-    margin: 0 auto; /* Centers the image */
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    margin: .5em
+}
 
-    label {
-        margin-bottom: 0;
-        margin-right: 10px;
-        flex: 2;
-    }
+.form-row label {
+    margin-bottom: 0;
+    margin-right: .5em;
+    flex: 2;
+}
 
-    input[type="text"],
-    select {
-        flex: 1;
-    }
+.form-row input[type="text"],
+.form-row select,
+.form-row p {
+    flex: 1;
+}
+
+/* Character Sheet Styles */
+.character-sheet {
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr;
+    grid-auto-rows: auto;
+}
+
+.character-title {
+    grid-column: 1 / span 3;
+}
+
+#ability-scores {
+    width: 100%;
+    text-align: center;
+}
+#ability-scores td, #ability-scores th {
+    text-align: center;
+}
+
+.character-sheet #ability-scores {
+    grid-column: 1 / span 3;
+}
+
+.character-sheet #inventory-row {
+    grid-column: 1 / span 3;
+}
+
+.hit-points {
+    border: 2px solid var(--text-color);
+    border-radius: 50%; 
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    letter-spacing: 0.001em;
+    text-align: center;
+    height: 4.1m;
+    width: 4.1em;
+    padding: 0.5em;
+}
+
+.hit-points>span {
+    display: block;
+    padding: 0.1em;
+    font-size: large;
+}
+
+.hit-points span.maximum-hit-points {
+    border-top: thin solid black;
+}
+
+.hit-points span.divider {
+    display: none;
 }
 
 @media (max-width: 768px) {

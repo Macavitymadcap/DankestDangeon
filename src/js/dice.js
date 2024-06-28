@@ -74,7 +74,7 @@ export class Dice {
             modifierString = ` - ${Math.abs(this.modifier)}`;
         }
 
-        return `${this.numDice > 1 ? this.numDice : ""}d${this.faces}${modifierString}`;
+        return `${this.numDice}d${this.faces}${modifierString}`;
     }
 
     /**

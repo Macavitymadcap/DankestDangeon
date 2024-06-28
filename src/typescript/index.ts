@@ -1,1 +1,0 @@
-import { loadScene } from "./sceneLoader";

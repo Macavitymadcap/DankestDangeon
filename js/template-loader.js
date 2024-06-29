@@ -1,5 +1,7 @@
 import scenes from "./scenes.js";
 import { PlayerCharacter } from "./character.js";
+import { elf, dwarf, halfling, human } from "./character-race.js";
+import { fighter, wizard, rogue } from "./character-class.js";
 
 const CHARACTER_SHEET_TEMPLATE = document.getElementById("character-sheet-template").innerHTML;
 const NARRATIVE_SCENE_TEMPLATE = document.getElementById("narrative-scene-template").innerHTML;
@@ -58,9 +60,44 @@ function populateCharacterCreator(sceneContainer) {
         event.preventDefault();
         const formData = new FormData(form);
         const characterName = formData.get("character-name");
+        
+        const characterRace = formData.get("character-race");
+        let race;
+        switch (characterRace) {
+            case "Elf":
+                race = elf;
+                break;
+            case "Dwarf":
+                race = dwarf;
+                break;
+            case "Halfling":
+                race = halfling;
+                break;
+            case "Human":
+                race = human;
+                break;
+            default:
+                console.error(`Unknown race ${chacaterRace}`);
+        }
+
         const characterClass = formData.get("character-class");
-        const characterRace = formData.get("character-race")
-        const playerCharacter = PlayerCharacter.createPlayerCharacter(characterName, characterClass, characterRace);
+        let chosenClass;
+        switch (characterClass) {
+            case "Fighter":
+                chosenClass = fighter;
+                break;
+            case "Wizard":
+                chosenClass = wizard;
+                break;
+            case "Rogue":
+                chosenClass = rogue;
+                break;
+            default:
+                console.error(`Unknown class ${characterClass}`);
+        }
+
+
+        const playerCharacter = new PlayerCharacter(characterName, chosenClass, race);
         sessionStorage.setItem("playerCharacter", JSON.stringify(playerCharacter));
         loadCharacterSheet();
         loadScene(2);

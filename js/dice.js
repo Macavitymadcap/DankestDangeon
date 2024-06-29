@@ -105,9 +105,25 @@ export class Dice {
      * @memberof Dice
      * @public
      */
-    roll(criticalHit = false) {
+    roll(criticalHit = false, advantage = false, disadvantage = false) {
+        this.numDice = (advantage || disadvantage || criticalHit) ? this.numdice * 2 : this.numDice;
+
         if (criticalHit) {
-            return new Roll(this.rollDice().concat(this.rollDice()), this.faces, this.modifier);
+            return new Roll(this.rollDice(), this.faces, this.modifier);
+        } else if (advantage) {
+            return new Roll(
+                this.rollDice().sort((a, b) => a - b), 
+                this.faces, 
+                this.modifier, 
+                "advantage"
+            );
+        } else if (disadvantage) {
+            return new Roll(
+                this.rollDice().sort((a, b) => b - a), 
+                this.faces, 
+                this.modifier, 
+                "disadvantage"
+            );
         }
         return new Roll(this.rollDice(), this.faces, this.modifier);
     }

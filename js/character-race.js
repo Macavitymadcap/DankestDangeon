@@ -1,7 +1,7 @@
-class Race {
-    constructor(name, nameAdjective, size,  abilityScoreModifiers, proficiencies = [], languages = [], traits = []) {
+export class Race {
+    constructor(name, adjective, size,  abilityScoreModifiers, proficiencies = [], languages = [], traits = []) {
         this.name = name;
-        this.nameAdjective = nameAdjective;
+        this.adjective = adjective;
         this.size = size;
         this.abilityScoreModifiers = abilityScoreModifiers;
         this.proficiencies = proficiencies;

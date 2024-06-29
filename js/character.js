@@ -1,80 +1,64 @@
-import { Dice } from "./dice.js";
-import { fighter, wizard, rogue } from "./character-class.js";
+import { CharacterClass } from "./character-class.js";
 import { AbilityScores } from "./ability-scores.js";
-import { human, elf, dwarf, halfling } from "./character-race.js";
+import { Race } from "./character-race.js";
+import { Skills } from "./skills.js";
 
-/**
- * Represents a character
- * @class Character
- * @param {string} name The character's name
- * @param {AbilityScores} abilityScores The character's ability scores
- * @param {number} maximumHitPoints The character's maximum hit points
- * @param {number} armourClass The character's armour class
- * @param {string} armourName The character's armour name
- * @param {Attack} attack The character's attack
- * @property {string} name The character's name
- * @property {number} maximumHitPoints The character's maximum hit points
- * @property {number} currentHitPoints The character's current hit points
- * @property {number} armourClass The character's armour class
- * @property {string} armourName The character's armour name
- * @property {Attack} attack The character's attack
- * @method isDead Whether the character is dead
- */
-class Character {
-    constructor(name, abilityScores, maximumHitPoints, armourClass, armourName, attack) {
-        this.name = name;
-        this.abilityScores = abilityScores;
-        this.maximumHitPoints = maximumHitPoints;
-        this.currentHitPoints = maximumHitPoints;
-        this.armourClass = armourClass;
-        this.armourName = armourName;
-        this.attack = attack;
-    }
-
-    /**
-     * @returns {boolean} Whether the character is dead
-     * @method isDead
-     * @memberof Character
-     * @instance
-     * @public
-     */
-    isDead() {
-        return this.currentHitPoints <= 0;
-    }
-}
 
 /**
  * Represents a player character
  * @class PlayerCharacter
  * @extends Character
  * @param {string} name The character's name
- * @param {AbilityScores} abilityScores The character's ability scores
- * @param {number} maximumHitPoints The character's maximum hit points
- * @param {number} armourClass The character's armour class
- * @param {string} armourName The character's armour name
- * @param {Attack} attack The character's attack
- * @param {string} characterClass The character's class
- * @param {string[]} [inventory=[]] The character's inventory
- * @property {string[]} inventory The character's inventory
- * @property {string} inventoryString The character's inventory as a string
+ * @param {CharacterClass} characterClass The character's class
+ * @param {Race} race The character's race
+ * @property {AbilityScores} abilityScores The character's ability scores
+ * @property {number} maximumHitPoints The character's maximum hit points
+ * @property {number} armourClass The character's armour class
+ * @property {string} armourName The character's armour name
+ * @property {Attack[]} attacks The character's attacks
+ * @property {string[]} [inventory=[]] The character's inventory
  * @method heal Heals the character
  * @method removeItem Removes an item from the character's inventory
  * @method addItem Adds an item to the character's inventory
- * @method getInventoryString Gets the character's inventory as a string
  * @method createPlayerCharacter Creates a new player character
  */
-export class PlayerCharacter extends Character {
-    constructor(name, abilityScores,  maximumHitPoints, armourClass, armourName, attack, characterClass, inventory = []) {
-        super(name, abilityScores, maximumHitPoints, armourClass, armourName, attack);
-        this.class = characterClass
-        this.inventory = inventory;
-        this.inventoryString = this.getInventoryString();
-        this.size = "Medium";
-        this.race = "Human";
-        this.raceAdjective = "Human";
+export class PlayerCharacter {
+    constructor(name, characterClass, race) {
+        this.name = name;
+        this.class = characterClass;
+        this.race = race;
+        this.proficiencyBonus = 2;
+
+        this.abilityScores = this.class.abilityScores;
+        for (const [key, value] of Object.entries(this.race.abilityScoreModifiers)) {
+            this.abilityScores[key] += value;
+        }
+        this.maximumHitPoints = this.class.hitDie + this.abilityScores.constitutionModifier;
+        this.currentHitPoints = this.maximumHitPoints;
+
+        this.armourClass = this.class.armourClass;
+        this.armourName = this.class.armourName;
+
+        this.attacks = [];
+        this.attacks += this.class.attack;
+
+        this.inventory =["bundle of torches", "5 days' rations"];
+        this.inventory += this.class.inventory;
+
+        this.size = this.race.size;
+
+        this.skills = new Skills(this.abilityScores, this.proficiencyBonus, this.class.expertiseSkills);
+
         this.proficiencies = [];
+        this.proficiencies += this.race.proficiencies;
+        this.proficiencies += this.class.proficiencies;
+
         this.languages = ["Common"];
+        this.languages += this.race.languages;
+
         this.traits = [];
+        this.traits += this.race.traits;
+        this.traits += this.class.traits;
 
     }
 
@@ -82,12 +66,12 @@ export class PlayerCharacter extends Character {
      * Heals the character up to their maximumHitPoints
      * @method heal
      * @memberof PlayerCharacter
+     * @param {Roll} healRoll The roll to heal the character
      * @instance
      * @public
      * @returns {void}
      */
-    heal() {
-        const healRoll = new Dice(4, 2, 2).roll();
+    heal(healRoll) {
         this.currentHitPoints = Math.min(this.maximumHitPoints, this.currentHitPoints + healRoll.total);
     }
 
@@ -118,104 +102,5 @@ export class PlayerCharacter extends Character {
      */
     addItem(item) {
         this.inventory.push(item);
-    }
-
-    /**
-     * @returns {string} The character's inventory as a string
-     */
-    getInventoryString() {
-        return this.inventory.join(", ");
-    }
-
-    /**
-     * Creates a new player character
-     * @param {string} name The character's name
-     * @param {string} characterClass The character's class
-     * @method createPlayerCharacter
-     * @memberof PlayerCharacter
-     * @static
-     * @returns {PlayerCharacter} The new player character
-     */
-    static createPlayerCharacter(name, characterClass, race) {
-        let character;
-        switch (characterClass) {
-            case "Fighter":
-                character = new PlayerCharacter(
-                    name, 
-                    fighter.abilityScores,
-                    fighter.maximumHitPoints, 
-                    fighter.armourClass, 
-                    fighter.armourName, 
-                    fighter.attack, 
-                    fighter.name, 
-                    fighter.inventory
-                );
-                break;
-            
-            case "Wizard":
-                character = new PlayerCharacter(
-                    name,
-                    wizard.abilityScores,
-                    wizard.maximumHitPoints, 
-                    wizard.armourClass, 
-                    wizard.armourName, 
-                    wizard.attack, 
-                    wizard.name, 
-                    wizard.inventory
-                );
-                break;
-            
-            case "Rogue":
-                character = new PlayerCharacter(
-                    name,
-                    rogue.abilityScores,
-                    rogue.maximumHitPoints, 
-                    rogue.armourClass, 
-                    rogue.armourName, 
-                    rogue.attack, 
-                    rogue.name, 
-                    rogue.inventory
-                );
-                break
-        
-            default:
-                console.error(`Invalid character class: ${characterClass}`);
-                break;
-        }
-
-        let playerRace;
-
-        switch (race) {
-            case "Human":
-                playerRace = human;
-                break;
-                
-            case "Elf":
-                playerRace = elf;
-                break;
-
-            case "Dwarf":
-                playerRace = dwarf;
-                break;
-
-            case "Halfling":
-                playerRace = halfling
-                break;
-
-            default:
-                console.error(`Invalid race ${race}`);
-                break;
-        }
-
-        character.race = playerRace.name;
-        character.raceAdjective = playerRace.nameAdjective;
-        character.size = playerRace.size;
-        character.languages += playerRace.languages;
-        character.traits += playerRace.traits;
-        character.proficiencies += playerRace.proficiencies;
-        for (const [key, value] of Object.entries(playerRace.abilityScoreModifiers)) {
-            character.abilityScores[key] += value;
-        }
-        return character;
     }
 }

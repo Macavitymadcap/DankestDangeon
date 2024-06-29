@@ -72,7 +72,7 @@
     <script id="character-sheet-template" type="text/x-handlebars-template">
         <div class="card character-sheet">
             <div class="character-title">
-                <h2>{{name}} the {{raceAdjective}} {{class}}</h2>
+                <h2>{{name}} the {{race.raceAdjective}} {{class.name}}</h2>
             </div>
             <table id="ability-scores">
                 <tr>
@@ -116,8 +116,8 @@
                 </p>
             </div>
             <div class="form-row">
-                <label for="attack">Attack</label>
-                <p name="attack">{{attack.string}}</p>
+                <label for="proficiency-bonus">Proficiency Bonus</label>
+                <p name="proficiency-bonus" class="hit-points">+{{proficiencyBonus}}</p>
             </div>
             <div class="form-row" id="inventory-row">
                 <label id="inventory" for="inventory">Inventory</label>

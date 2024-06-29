@@ -237,15 +237,15 @@ select:focus {
     vertical-align: middle;
     letter-spacing: 0.001em;
     text-align: center;
-    height: 4.1m;
+    height: 4.1em;
     width: 4.1em;
     padding: 0.5em;
 }
 
-.hit-points>span {
+.hit-points>span,
+.armour-class>span {
     display: block;
     padding: 0.1em;
-    font-size: large;
 }
 
 .hit-points span.maximum-hit-points {

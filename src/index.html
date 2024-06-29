@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="css/choices.css"> -->
 
     <!-- external script imports -->
-    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
     <!-- template definitions  -->
@@ -111,7 +110,10 @@
             </div> 
             <div class="form-row">
                 <label for="armour-class">Armour Class</label> 
-                <p name="armour-class">{{armourClass}}<i> ({{armourName}})</i></p>
+                <p name="armour-class" class="armour-class">
+                    <span class="armour-class-score">{{armourClass}}
+                    </span class="armour-class-name"><i>({{armourName}})</i>
+                </p>
             </div>
             <div class="form-row">
                 <label for="attack">Attack</label>

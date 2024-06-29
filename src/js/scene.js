@@ -13,10 +13,10 @@ import { PlayerCharacter } from "./character.js";
  */
 class Scene {
     sceneContainer = document.getElementById("scene")
-    templateId = ""
 
-    constructor(sceneData) {
+    constructor(sceneData, templateId) {
         this.sceneData = sceneData;
+        this.templateId = templateId;
         this.template = document.getElementById(this.templateId);
         this.render = Handlebars.compile(this.template);
     }
@@ -73,7 +73,10 @@ class Scene {
  * @method getRenderedTemplate Renders the template
  */
 export class NarrativeScene extends Scene {
-    templateId = "narrative-scene-template"
+    constructor(sceneData, templateId) {
+        super(sceneData, templateId);
+    }
+
     /**
      * Populates the scene with the ability to select choices
      * @memberof NarrativeScene
@@ -106,7 +109,10 @@ export class NarrativeScene extends Scene {
  * @property {string} templateId The template for the scene
  */
 export class CharacterCreator extends Scene {
-    templateId = "character-creator-template"
+    constructor(sceneData, templateId) {
+        super(sceneData, templateId);
+    }
+
     /**
      * Populates the scene with the a form for generating a character
      * @memberof CharacterCreatorScene
@@ -124,7 +130,8 @@ export class CharacterCreator extends Scene {
             const formData = new FormData(form);
             const characterName = formData.get("character-name");
             const characterClass = formData.get("character-class");
-            const playerCharacter = PlayerCharacter.createPlayerCharacter(characterName, characterClass);
+            const characterRace = formData.get("character-race");
+            const playerCharacter = PlayerCharacter.createPlayerCharacter(characterName, characterClass, characterRace);
             sessionStorage.setItem("playerCharacter", JSON.stringify(playerCharacter));
             loadCharacterSheet();
             loadScene(2);

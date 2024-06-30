@@ -1,2 +1,2 @@
-export { initialiseGame, loadScene, loadCharacterSheet } from "./template-loader.js";
-export { scenes } from "./scenes.js"
+export { initialiseGame } from "./template-loader";
+export { NarrativeScene}

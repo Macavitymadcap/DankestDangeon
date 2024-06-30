@@ -1,7 +1,14 @@
-import scenes from "./scenes.js";
-import { PlayerCharacter } from "./character.js";
-import { elf, dwarf, halfling, human } from "./character-race.js";
-import { fighter, wizard, rogue } from "./character-class.js";
+import { scenes } from "./scenes.js";
+import {
+    PlayerCharacter,
+    elf,
+    dwarf,
+    halfling,
+    human,
+    fighter,
+    wizard,
+    rogue
+} from "../player-character";
 
 const CHARACTER_SHEET_TEMPLATE = document.getElementById("character-sheet-template").innerHTML;
 const NARRATIVE_SCENE_TEMPLATE = document.getElementById("narrative-scene-template").innerHTML;
@@ -44,7 +51,7 @@ function getRenderedTemplate(scene) {
         case "character-creator":
             return renderCharacterCreator(scene);
         case "narrative":
-            return  renderNarrativeScene(scene);
+            return renderNarrativeScene(scene);
         default:
             console.error(`Unknown scene type: ${scene.type}`);
     }
@@ -60,7 +67,7 @@ function populateCharacterCreator(sceneContainer) {
         event.preventDefault();
         const formData = new FormData(form);
         const characterName = formData.get("character-name");
-        
+
         const characterRace = formData.get("character-race");
         let race;
         switch (characterRace) {
@@ -77,7 +84,7 @@ function populateCharacterCreator(sceneContainer) {
                 race = human;
                 break;
             default:
-                console.error(`Unknown race ${chacaterRace}`);
+                console.error(`Unknown race ${characterRace}`);
         }
 
         const characterClass = formData.get("character-class");
@@ -168,5 +175,10 @@ export function loadScene(sceneId) {
         addItems(scene.items);
         loadCharacterSheet();
     }
+}
+
+export function initialiseGame() {
+    loadScene(0);
+    CHARACTER_SHEET_CONTAINER.innerHTML = "";
 }
 

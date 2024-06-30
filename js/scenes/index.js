@@ -1,0 +1,1 @@
+export { initialiseGame } from "./template-loader";

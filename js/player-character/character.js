@@ -1,7 +1,7 @@
 import { CharacterClass } from "./character-class.js";
-import { AbilityScores } from "./ability-scores.js";
 import { Race } from "./character-race.js";
 import { Skills } from "./skills.js";
+import { Gear } from "../items";
 
 
 /**
@@ -16,7 +16,7 @@ import { Skills } from "./skills.js";
  * @property {number} armourClass The character's armour class
  * @property {string} armourName The character's armour name
  * @property {Attack[]} attacks The character's attacks
- * @property {string[]} [inventory=[]] The character's inventory
+ * @property {Gear[]} [inventory=[]] The character's inventory
  * @method heal Heals the character
  * @method removeItem Removes an item from the character's inventory
  * @method addItem Adds an item to the character's inventory
@@ -77,15 +77,15 @@ export class PlayerCharacter {
 
     /**
      * Removes an item from the character's inventory if they have it
-     * @param {string} item 
+     * @param {string} itemName
      * @method removeItem
      * @memberof PlayerCharacter
      * @instance
      * @public
      * @returns {void}
      */
-    removeItem(item) {
-        const hasItem = this.inventory.find(i => i === item);
+    removeItem(itemName) {
+        const hasItem = this.inventory.find(item => item.name === itemName);
         if (hasItem) {
             this.inventory = this.inventory.filter(i => i !== item);
         }
@@ -93,7 +93,7 @@ export class PlayerCharacter {
 
     /**
      * Add an item to the character's inventory 
-     * @param {string} item
+     * @param {Gear} item
      * @method addItem
      * @memberof PlayerCharacter
      * @public

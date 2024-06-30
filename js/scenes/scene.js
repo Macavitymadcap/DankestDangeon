@@ -1,4 +1,4 @@
-import { PlayerCharacter } from "./character.js";
+import { PlayerCharacter } from "../player-character";
 
 /**
  * Base class for scenes

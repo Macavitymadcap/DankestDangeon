@@ -1,5 +1,4 @@
-import { Dice, Roll } from "./dice.js";
-import { AbilityScores } from "./ability-scores.js";
+import { Dice } from "../dice-box";
 
 
 class Skill {

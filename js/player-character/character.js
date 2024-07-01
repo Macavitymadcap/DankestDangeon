@@ -1,7 +1,7 @@
 import { CharacterClass } from "./character-class.js";
 import { Race } from "./character-race.js";
 import { Skills } from "./skills.js";
-import { Gear } from "../items/index.js";
+import { Gear, torch, ration } from "../items/index.js";
 
 
 /**
@@ -42,8 +42,8 @@ export class PlayerCharacter {
         this.attacks = [];
         this.attacks += this.class.attack;
 
-        this.inventory =["bundle of torches", "5 days' rations"];
-        this.inventory += this.class.inventory;
+        this.inventory =[{ item: torch, quantity: 3}, {item: ration, quantity: 5}]
+        // this.inventory += this.class.inventory;
 
         this.size = this.race.size;
 

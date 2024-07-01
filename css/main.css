@@ -31,6 +31,7 @@ body,
 html {
     height: 100%;
     margin: 0;
+    font-size: 16px;
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -47,19 +48,12 @@ main {
     flex-direction: column;
 }
 
-
-
 section {
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-header {
-    width: 100%;
-    text-align: center;
 }
 
 h1,
@@ -67,6 +61,12 @@ h2,
 h3 {
     text-align: center;
     font-family: 'MedievalSharp', cursive;
+    font-size: 2rem;
+}
+
+header {
+    width: 100%;
+    text-align: center;
 }
 
 .card {
@@ -74,9 +74,8 @@ h3 {
     padding: 20px;
     margin: 20px;
     box-sizing: border-box;
-    width: 80%;
+    width: 90vh;
     font-family: 'crimson-text', serif;
-    max-width: 600px;
     background-color: var(--card-background);
     border-radius: 10px;
 }
@@ -215,8 +214,11 @@ select:focus {
 
 #ability-scores {
     width: 100%;
+    max-width: 100%;
     text-align: center;
+    table-layout: fixed;
 }
+
 #ability-scores td, #ability-scores th {
     text-align: center;
 }
@@ -256,8 +258,57 @@ select:focus {
     display: none;
 }
 
+/* Media Queries */
+@media (max-width: 1024px) {
+    body, html {
+        font-size: 15px; /* Slightly smaller font size for tablets */
+    }
+
+    .card {
+        padding: 1.5em; /* Smaller padding */
+    }
+
+    h1, h2, h3 {
+        font-size: 1.8rem; /* Adjust heading sizes */
+    }
+
+    #ability-scores td, #ability-scores th {
+        padding: 0.5em; /* Adjust padding for better spacing */
+        font-size: 0.9rem; /* Adjust font size for readability */
+    }
+}
+
 @media (max-width: 768px) {
     .character-sheet {
-        padding: 15px;
+        grid-template-columns: 1fr; /* Stack elements vertically on smaller screens */
+    }
+
+    .form-row {
+        grid-template-columns: 1fr; /* Make form rows stack vertically */
+    }
+
+    h1, h2, h3 {
+        font-size: 1.5rem; /* Smaller headings for mobile */
+    }
+
+    #ability-scores td, #ability-scores th {
+        padding: 0.4em; /* Further reduce padding for smaller screens */
+        font-size: 0.8rem; /* Further reduce font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    body, html {
+        font-size: 14px; /* Smaller font size for phones */
+    }
+
+    .choices a, button {
+        padding: 12px 18px; /* Larger touch targets */
+        font-size: 1rem; /* Larger font for readability */
+    }
+
+    #ability-scores td, #ability-scores th {
+        padding: 0.3em; /* Minimal padding for very small screens */
+        font-size: 0.7rem; /* Smallest font size for readability */
     }
 }

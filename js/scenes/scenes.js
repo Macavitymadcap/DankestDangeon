@@ -2,12 +2,11 @@ export const scenes = {
     0: {
         type: "narrative",
         title: "New Game",
-        image: "cloaked-figure.webp",
         description: [
-            "Well met traveller, be ye brave enough to face the Dankest of All Dangeons?",
-            "This is a hyper text love letter to adventure game books of yore, where your decisions shape the story.",
-            "Not only is this Dangeon Dank, it also Dangerous, and it is unlikely you will reach then end on your first run.",
-            "But fear not, for you can always start again, and try a different path.",
+            "Well met traveller. This is a hyper text love letter to adventure game books of yore, where YOU are the hero (or what passes for one these days), who dcides the fate of the story.",
+            "You will fight vicious monsters, converse with bizzare characters and solve fiendish puzzles in a fantasy (sorry, Dantasy) world of my own creation.",
+            "Mechanically the game is based on Dungeons and Dragons 5th edition, but with a simplified ruleset and a focus on narrative and exploration.",
+            "You start your quest by creating your character, the hero of our tale who will face all the dangers of this, the Dankest of Dangeons.",
             "So, are you ready to begin your adventure?"
         ],
         choices: [
@@ -41,151 +40,57 @@ export const scenes = {
     },
     2: {
         type: "narrative",
-        title: "The Dark Forest",
-        image: "dark-forest.webp",
+        title: "The Morning After",
         description: [
-            "You find yourself in a dark and eerie forest.",
-            "Trees loom overhead, blocking out most of the light, and the air is thick with the smell of damp earth.", 
-            "To your south and west you are enclosed by the dense forest, to the north and east you can see a faint light filtering through the trees.",
-            "Which way do you want to go?"
+           "You awaken, and the mere act of coming to consciousness starts a dull throbbing in your head, which crescendos to rapid-fire pusles of pain as you prise your eyes apart.",  
+           "The world is a carousel of blurred shapes, dull colours and muffled sounds. Gradually it slows, and the vague impressions coalesce into something you can work with.",
+           "The bed your are in is (mercifully) comfortable, and you lie in it fully clothed reeking of booze. The wider view around you is blocked out by the figure of a halfling woman who leans over you.",
+           "\"Morning flower,\" she says, her voice a warm burr. \"How's your head?\"",
         ],
         choices: [
             {
-                text: "Go north",
-                sceneId: 4
+                text: "I've had no complaints",
+                sceneId: 3
             },
             {
-                text: "Go east",
-                sceneId: 3
+                text: "I feel like a dragon shat in my head",
+                sceneId: 4
             }
         ]
     },
     3: {
         type: "narrative",
-        title: "Big River",
-        image: "big-river.webp",
+        title: "The Night Before",
         description: [
-            "Heading east into the forest, you come across a wide river.",
-            "The water is dark and murky, and you can hear the sound of rushing water.", 
-            "What do you do?"
+            "She chuckles. \"Glad to see my beer hasn't has damaged that wit of yours.\" she says, getting down with the aid of a wooden step ladder which she pushes back under the bed.",
+            "Recollections of the night before filtering into your memory. Yesterday you graduated from the Adventurer's Academy, and to celebrate your status as a full licensed hero you headed to The Stumbling Scholar, a tavern just about in your price range.",
+            "Cakes and ale led to wine and laughter; wine and laughter led to shots and shots led to a room for the night because you couldn't quite master the trick of walking with out falling over.",
+            "The halfing woman, you remember, is the pub's landlady Jillian Fearnfield. Once an adventurer herself, she retired some years back and with all the treasure she had gained on her travels bought this place.",
+            "You look to her and see a smile on her face.",
+            "\"Well flower, seeing as your brain's working, there's a little matter I need to discuss with you.\""
         ],
         choices: [
             {
-                text: "Swim across the river",
-                sceneId: 6
-            },
-            {
-                text: "Follow the riverbank",
-                sceneId: 7
+                text: "What is it?",
+                sceneId: 5
             }
         ]
     },
     4: {
         type: "narrative",
-        title: "As Pigs in Muck",
-        image: "fucked-up-pigs.webp",
+        title: "The Night Before", 
         description: [
-            "As you walk north, you come across a family of pigs. The pigs at first galnce appear normal, but the more you look the odder they seem.",
-            "Almost as if they were the creation of some deity that had heard of pigs but never actually seen one.", 
-            "They are busy snuffling around in the undergrowth, covered in filth and oblivious to your presence.", 
-            "What do you do?"
+            "She chuckles. \"I'll bet you do, you drank a dragon's sufficiency of beer.\", she says, getting down with the aid of a wooden step ladder which she pushes back under the bed.",
+            "Recollections of the night before filtering into your memory. Yesterday you graduated from the Adventurer's Academy, and to celebrate your status as a full licensed hero you headed to The Stumbling Scholar, a tavern just about in your price range.",
+            "Cakes and ale led to wine and laughter; wine and laughter led to shots and shots led to a room for the night because you couldn't quite master the trick of walking without bumping into things and falling over.",
+            "The halfing woman, you remember, is the pub's landlady Jillian Fearnfield. Once an adventurer herself, she retired some years back and with all the treasure she had gained on her travels bought this place.",
+            "\"Which leads me to a little matter I need to discuss with you flower.\""
         ],
         choices: [
             {
-                text: "Join the Pigs",
+                text: "What is it?",
                 sceneId: 5
-            },
-            {
-                text: "Continue North",
-                sceneId: 4
             }
         ]
-    },
-    5: {
-        type: "narrative",
-        title: "Truffle Feast",
-        image: "truffle-feast.webp",
-        description:[ 
-            "You join the bizarre looking pigs snuffling in the undergrowth. After much searching they begin grunting and reveal truffles in the earth.", 
-            "The pigs seem proper chuffed, and start gorging on the hoard of truffle. You join them, and they are delicious and nutritious - healing you of the aches of the road..", 
-            "You add a handful of the tasty truffles to your inventory and make your goodbyes to the pigs."
-        ],
-        choices: [
-            {
-                text: "Continue north",
-                sceneId: 2
-            }
-        ],
-        items: [
-            "handful of truffles"
-        ]
-    },
-    6: {
-        type: "narrative",
-        title: "River Swim",
-        description: [
-            "You decide to swim across the river.", 
-            "The water is cold and fast-flowing, but you manage to make it to the other side.", 
-            "You are soaking wet, but you feel refreshed and invigorated."
-        ],
-        choices: [
-            {
-                text: "Follow the riverbank",
-                sceneId: 7
-            }
-        ]
-    },
-    7: {
-        type: "narrative",
-        title: "Riverbank",
-        description: [
-            "You follow the riverbank for a while, the sound of the water is soothing.", 
-            "You can see a small boat moored up ahead.", 
-            "What do you do?"
-        ],
-        choices: [
-            {
-                text: "Take the boat",
-                sceneId: 8
-            },
-            {
-                text: "Continue along the riverbank",
-                sceneId: 9
-            }
-        ]
-    },
-    8: {
-        type: "narrative",
-        title: "Boat Ride",
-        description: [
-            "You take the boat and row across the river.", 
-            "The water is calm and the boat is easy to control.", 
-            "You reach the other side and tie up the boat."
-        ],
-        choices: [
-            {
-                text: "Continue along the riverbank",
-                sceneId: 9
-            }
-        ]
-    },
-    9: {
-        type: "narrative",
-        title: "Riverbank",
-        description: [
-            "You continue along the riverbank, the sun is starting to set.", 
-            "You can see a small clearing up ahead.", 
-            "What do you do?"
-        ],
-        choices: [
-            {
-                text: "Rest for the night",
-                sceneId: 10
-            },
-            {
-                text: "Continue along the riverbank",
-                sceneId: 11
-            }
-        ]
-    },
+    }
 };

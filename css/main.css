@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=MedievalSharp&display=swap');
+
 :root {
     --background-color: #fff;
     --text-color: #333;
@@ -71,16 +73,32 @@ header {
 
 .card {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    margin: 20px;
+    margin: .5rem;
+    padding: 5rem;
+    width: 100%;
+    min-width: 90%;
+    font-size: 1.125rem;
     box-sizing: border-box;
-    width: 90vh;
     font-family: 'crimson-text', serif;
     background-color: var(--card-background);
     border-radius: 10px;
 }
 
 /* Scene Styles */
+.scene-content {
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    align-content: space-evenly;
+}
+
+.scene-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 button {
     background-color: var(--button-background);
     color: var(--button-text-color);
@@ -91,7 +109,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.25rem;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -117,7 +135,7 @@ button:hover {
     padding: 5px 8px;
     background-color: transparent;
     color: var(--button-text-color);
-    font-size: 16px;
+    font-size: 1.25rem;
     text-decoration: underline;
     text-align: center;
     border: none;
@@ -128,12 +146,12 @@ button:hover {
 }
 
 .choices li::before {
-    content: "\261E"; /* You can replace '•' with any character or Unicode symbol */
-    color: var(--text-color); /* Custom color */
-    font-weight: bold; /* Custom font weight */
-    display: inline-block; /* Makes the pseudo-element behave like text */
-    width: 1em; /* Ensures proper spacing between the bullet and the text */
-    margin-left: -1em; /* Adjusts position to align with the list items */
+    content: "\261E"; 
+    color: var(--text-color); 
+    font-weight: bold; 
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
 }
 
 .choices a:hover,
@@ -143,18 +161,11 @@ button:hover {
     background-color: transparent;
 }
 
-.scene-image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
 /* Form Styles */
 label {
     display: block;
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 1.25rem;
     text-align: right;
     font-weight: bold;
 }
@@ -167,7 +178,7 @@ select {
     border: 1px solid var(--text-color);
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 1.25rem;
     background-color: var(--input-background, #fff) !important;
     color: var(--input-text-color, #333);
     border: 1px solid var(--input-border-color, #ccc);
@@ -258,7 +269,6 @@ select:focus {
     display: none;
 }
 
-/* Media Queries */
 @media (max-width: 1024px) {
     body, html {
         font-size: 15px; /* Slightly smaller font size for tablets */
@@ -283,10 +293,6 @@ select:focus {
         grid-template-columns: 1fr; /* Stack elements vertically on smaller screens */
     }
 
-    .form-row {
-        grid-template-columns: 1fr; /* Make form rows stack vertically */
-    }
-
     h1, h2, h3 {
         font-size: 1.5rem; /* Smaller headings for mobile */
     }
@@ -299,7 +305,7 @@ select:focus {
 
 @media (max-width: 480px) {
     body, html {
-        font-size: 14px; /* Smaller font size for phones */
+        font-size: 0.7rem; /* Smaller font size for phones */
     }
 
     .choices a, button {

@@ -6,39 +6,41 @@
     <meta charset="UTF-8">
 
     <!-- style imports -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=MedievalSharp&display=swap');
-    </style>
     <link rel="stylesheet" href="css/main.css">
-    <!-- <link rel="stylesheet" href="css/character-creator.css">
-    <link rel="stylesheet" href="css/choices.css"> -->
 
     <!-- external script imports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
 
     <!-- template definitions  -->
     <script id="narrative-scene-template" type="text/x-handlebars-template">
-        <div class="card narrative-scene">
+        <div class="card">
             <h2>{{title}}</h2>
-            {{#if image}}
-                <img src="images/{{image}}" alt="{{title}}" class="scene-image">
-            {{/if}}
-            <!-- <img src="images/{{image}}" alt="{{title}}"> -->
-            {{#each description}}
-                <p>{{this}}</p>
-            {{/each}}
-            <ul class="choices">
-                {{#each choices}}
-                    <li>
-                        <a href="#" data-scene-id="{{sceneId}}">{{text}}</a>
-                    </li>
-                {{/each}}
-            </ul>
+            <div class="scene-content">
+                {{#if image}}
+                    <div>
+                        <img src="images/{{image}}" alt="{{title}}" class="scene-image">
+                    </div>
+                {{/if}}
+                    <div class="scene-text">
+                        {{#each description}}
+                            <p>{{this}}</p>
+                        {{/each}}  
+                    </div>
+                {{#if choices}}
+                    <ul class="choices">
+                        {{#each choices}}
+                            <li>
+                                <a href="#" data-scene-id="{{sceneId}}">{{text}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
         </div>
     </script>
 
     <script id="character-creator-template" type="text/x-handlebars-template">
-        <div class="card character-creator">
+        <div class="card">
             <h2>{{title}}</h2>
             <p>{{description}}</p>
             <form action="#">
@@ -146,7 +148,8 @@
     <script src="js/scenes/index.js" type="module"></script>
 
     <!-- Page initialisation script-->
-    <script>
+    <script type="module">
+        import { initialiseGame } from './js/scenes/index.js';
         document.addEventListener('DOMContentLoaded', () => {
             const themeToggleBtn = document.getElementById('theme-toggle');
             const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -157,6 +160,8 @@
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
             });
+
+            initialiseGame();
         });
     </script>
 </head>
@@ -170,12 +175,6 @@
         <section id="scene"></section>
         <section id="sheet"></section>
     </main>
-    <script type="module">
-        import { initialiseGame } from './js/scenes/index.js';
-        document.addEventListener("DOMContentLoaded", () => {
-            initialiseGame();
-        });
-    </script>
 </body>
 
 </html>

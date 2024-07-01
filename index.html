@@ -131,11 +131,11 @@
     </script>
 
     <!-- script imports -->
-    <script src="js/scenes/index.js" type="module"></script>
     <script src="js/dice-box/index.js" type="module"></script>
     <script src="js/player-character/index.js" type="module"></script>
     <script src="js/stat-block/index.js" type="module"></script>
     <script src="js/items/index.js" type="module"></script>
+    <script src="js/scenes/index.js" type="module"></script>
 
     <!-- Page initialisation script-->
     <script>
@@ -163,7 +163,7 @@
         <section id="sheet"></section>
     </main>
     <script type="module">
-        import { initialiseGame } from './js/index.js';
+        import { initialiseGame } from './js/scenes/index.js';
         document.addEventListener("DOMContentLoaded", () => {
             initialiseGame();
         });

@@ -1,7 +1,5 @@
-import { Dice } from "./dice-box/dice.js";
-
 export class Gear {
-    constructor(name, type, cost=None, weight=None) {
+    constructor(name, type, cost=null, weight=null) {
         this.type = type;
         this.name = name;
         this.cost = cost;

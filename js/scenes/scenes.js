@@ -1,4 +1,4 @@
-export default scenes = {
+export const scenes = {
     0: {
         type: "narrative",
         title: "New Game",

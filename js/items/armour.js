@@ -1,7 +1,7 @@
 import { Gear } from "./gear.js";
 
 export class Armour extends Gear {
-    constructor(name, type, cost=None, weight=None, armourClass, dexMod=None, strength=None, stealth=None){
+    constructor(name, type, cost=None, weight=null, armourClass, dexMod=null, strength=null, stealth=null){
         super(name, type, cost, weight);
         this.armourClass = armourClass;
         this.dexMod = dexMod;
@@ -16,7 +16,7 @@ const chainmail = new Armour(
     "75 gp",
     "55 lb.",
     16,
-    None,
+    null,
     13,
     "disadvantage"
 );
@@ -41,8 +41,8 @@ const leather = new Armour(
 const mageArmour = new Armour(
     "mage armour",
     "Spell Armour",
-    None,
-    None,
+    null,
+    null,
     13,
     "+ Dex"
 );

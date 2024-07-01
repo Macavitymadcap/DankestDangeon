@@ -1,5 +1,5 @@
-import { Dice } from "../dice-box";
-import { AbilityScores, Attack, Damage } from "../stat-block";
+import { Dice } from "../dice-box/index.js";
+import { AbilityScores, Attack, Damage } from "../stat-block/index.js";
 
 export class CharacterClass {
     constructor(name, abilityScores, hitDie, armourClass, armourName, attack, inventory) {

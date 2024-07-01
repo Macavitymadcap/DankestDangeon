@@ -1,4 +1,4 @@
-import { Roll } from "./roll";
+import { Roll } from "./roll.js";
 /**
  * Represents 1 or more dice to be rolled with an optional modifier
  * @class Dice

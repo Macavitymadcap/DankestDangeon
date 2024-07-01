@@ -1,12 +1,14 @@
+import { Dice } from "../dice-box/index.js";
 import { Gear } from "./gear.js";
 
 export class Weapon extends Gear {
-    constructor(name, cost=None, weight=None, type, damageDice, damageType, properties=None, range=None) {
+    constructor(name, cost=None, weight=null, type, damageDice, damageType, properties=None, range=null) {
         super(name, cost, weight);
         this.type = type;
         this.damageDice = damageDice;
         this.damageType = damageType;
         this.properties = properties;
+        this.range = range;
     }
 };
 

@@ -1,5 +1,5 @@
-import { Dice } from "../dice-box";
-import { Damage } from "../stat-block";
+import { Dice } from "../dice-box/index.js";
+import { Damage } from "../stat-block/index.js";
 
 /**
  * Represents an Attack

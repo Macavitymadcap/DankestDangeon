@@ -1,4 +1,4 @@
-import { Dice } from "../dice-box";
+import { Dice } from "../dice-box/index.js";
 
 
 class Skill {

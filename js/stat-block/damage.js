@@ -1,4 +1,4 @@
-import { Dice } from "../dice-boxs";
+import { Dice } from "../dice-box/index.js";
 
 /**
  * Represents a Damage roll

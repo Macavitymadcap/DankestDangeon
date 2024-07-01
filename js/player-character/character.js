@@ -1,7 +1,7 @@
 import { CharacterClass } from "./character-class.js";
 import { Race } from "./character-race.js";
 import { Skills } from "./skills.js";
-import { Gear } from "../items";
+import { Gear } from "../items/index.js";
 
 
 /**

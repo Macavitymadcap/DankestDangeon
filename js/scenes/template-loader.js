@@ -8,7 +8,7 @@ import {
     fighter,
     wizard,
     rogue
-} from "../player-character";
+} from "../player-character/index.js";
 
 const CHARACTER_SHEET_TEMPLATE = document.getElementById("character-sheet-template").innerHTML;
 const NARRATIVE_SCENE_TEMPLATE = document.getElementById("narrative-scene-template").innerHTML;
